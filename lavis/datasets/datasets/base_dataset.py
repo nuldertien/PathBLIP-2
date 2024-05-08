@@ -79,7 +79,6 @@ class ConcatDataset(ConcatDataset):
 
     def collater(self, samples):
         # TODO For now only supports datasets with same underlying collater implementations
-
         all_keys = set()
         for s in samples:
             all_keys.update(s)

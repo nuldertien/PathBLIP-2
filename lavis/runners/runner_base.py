@@ -106,7 +106,9 @@ class RunnerBase:
 
             num_parameters = 0
             for p_group in optim_params:
+                # print(p_group["params"])
                 for p in p_group["params"]:
+                    # print(p.data.nelement())
                     num_parameters += p.data.nelement()    
             logging.info("number of trainable parameters: {}".format(num_parameters))      
                   
@@ -419,7 +421,8 @@ class RunnerBase:
             if self.save_freq>0 and cur_epoch%self.save_freq == 0:
                 self._save_checkpoint(cur_epoch, is_best=False)
 
-            dist.barrier()
+            if dist.is_available() and dist.is_initialized():
+                dist.barrier()  
 
         # save last checkpoint
         if self.save_last and not self.evaluate_only:

@@ -226,7 +226,12 @@ def all_gather_with_grad(tensors):
     Graph remains connected for backward grad computation.
     """
     # Queue the gathered tensors
-    world_size = torch.distributed.get_world_size()
+    try:
+        world_size = torch.distributed.get_world_size()
+    except:
+        # If not in distributed mode, world_size is 1
+        world_size = 1 
+
     # There is no need for reduction in the single-proc case
     if world_size == 1:
         return tensors

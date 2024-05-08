@@ -150,11 +150,9 @@ class Blip2Qformer(Blip2Base):
         sim_t2i, _ = sim_t2q.max(-1)
         sim_t2i = sim_t2i / self.temp  # [batch_size, batch_size*num_gpu]
 
-        rank = dist.get_rank()
+        # rank = dist.get_rank()
         bs = image.size(0)
-        targets = torch.linspace(rank * bs, rank * bs + bs - 1, bs, dtype=int).to(
-            image.device
-        )
+        targets = torch.arange(0, bs, dtype=torch.long).to(image.device)
 
         if "image_id" in samples.keys(): #coco retrieval finetuning
             image_ids = samples["image_id"].view(-1,1)
@@ -182,8 +180,11 @@ class Blip2Qformer(Blip2Base):
                 sim_t2i.masked_fill_(mask, -10000)
                 sim_i2t.masked_fill_(mask, -10000)
             else:    
-                sim_t2i[:, rank * bs : rank * bs + bs].fill_diagonal_(-10000)
-                sim_i2t[:, rank * bs : rank * bs + bs].fill_diagonal_(-10000)            
+                # sim_t2i[:, rank * bs : rank * bs + bs].fill_diagonal_(-10000)
+                sim_t2i[:, bs : bs + bs].fill_diagonal_(-10000)
+
+                # sim_i2t[:, rank * bs : rank * bs + bs].fill_diagonal_(-10000)            
+                sim_i2t[:, bs : bs + bs].fill_diagonal_(-10000)            
                 
             weights_t2i = F.softmax(sim_t2i, dim=1)
             weights_i2t = F.softmax(sim_i2t, dim=1)
