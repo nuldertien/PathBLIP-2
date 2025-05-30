@@ -1,0 +1,72 @@
+ # Copyright (c) 2022, salesforce.com, inc.
+ # All rights reserved.
+ # SPDX-License-Identifier: BSD-3-Clause
+ # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+
+model:
+  arch: blip2_biogpt
+  model_type: pretrain_biogpt 
+  load_pretrained: True
+  pretrained: "./lavis/output/Pathology/Pretrain_stage1/20241105124/checkpoint_best.pth"
+  load_finetuned: False
+  finetuned: ""
+  freeze_vit: True
+  padding_per_batch: True
+  vit_model: identity
+  max_txt_len: 1024
+  num_query_token: 32
+  biogpt_model: "microsoft/biogpt"
+  unfreeze_last_layer: True
+  all_info_bool: False
+  prompt: "You are an AI assistant specializing in pathology. Your task is to write a detailed medical report for a patient based on their H&E stained whole-slide image(s) (WSIs). </s>"
+  
+datasets:
+  pathology_dataset: # name of the dataset builder
+    text_processor:
+        train:
+          name: "pathology_caption"
+          prompt: "You are an AI assistant specializing in pathology. Your task is to write a detailed medical report for a patient based on their H&E stained whole-slide image(s) (WSIs). </s>"
+        eval:
+          name: "pathology_caption"
+          prompt: "You are an AI assistant specializing in pathology. Your task is to write a detailed medical report for a patient based on their H&E stained whole-slide image(s) (WSIs). </s>"
+
+run:
+  task: pathology_captioning
+  # optimizer
+  lr_sched: "linear_warmup_cosine_lr"
+  init_lr: 1e-4
+  min_lr: 1e-5
+  warmup_lr: 1e-6
+
+  weight_decay: 0.01
+  max_epoch: 101
+  batch_size_train: 24
+  batch_size_eval: 24
+  num_workers: 1
+  warmup_steps: 1000
+
+  seed: 42
+  output_dir: "output/Pathology/Pretrain_stage2"
+
+  amp: True
+  resume_ckpt_path: null
+
+  evaluate: False 
+  report_metric_during_training: False
+  num_beams: 4
+  max_len: 1024
+  min_len: 150
+  top_p: 1.0
+  repetition_penalty: 1.2
+  length_penalty: 1.1
+  temperature: 0.8
+  num_captions: 1
+  train_splits: ['train']
+  valid_splits: ['val']
+  test_splits: ['test']
+
+  device: "cuda"
+  world_size: 1
+  dist_url: "env://"
+  distributed: True
+  save_freq: 10

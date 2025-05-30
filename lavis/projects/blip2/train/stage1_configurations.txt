@@ -1,0 +1,12 @@
+--options \
+datasets.pathology_dataset.build_info.annotations.train.url "./data/pathology/train_data.json" \
+datasets.pathology_dataset.build_info.annotations.train.storage "./data/pathology/train_data.json" \
+datasets.pathology_dataset.build_info.annotations.val.url "./data/pathology/val_data.json" \
+datasets.pathology_dataset.build_info.annotations.val.storage "./data/pathology/val_data.json" \
+datasets.pathology_dataset.build_info.annotations.test.url "./data/pathology/test_data.json" \
+datasets.pathology_dataset.build_info.annotations.test.storage "./data/pathology/test_data.json" \
+datasets.pathology_dataset.build_info.features.storage "../../features/hipt_last_layer/" \
+run.batch_size_train 20 \
+run.batch_size_eval 20 \
+run.save_freq 5 \
+run.output_dir "../output/Pathology/Pretrain_stage1"

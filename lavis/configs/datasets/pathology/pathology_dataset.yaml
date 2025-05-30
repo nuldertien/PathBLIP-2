@@ -1,0 +1,20 @@
+datasets:
+  pathology_dataset: # name of the dataset builder
+    # dataset_card: dataset_card/avsd_dialogue.md # path to the dataset card
+    data_type: features # Since we are using the features that are extracted from an image
+    # and not the raw image or a
+
+    build_info:
+      # Be careful not to append minus sign (-) before split to avoid itemizing
+      annotations:
+        train:
+          url: ./projects/pathology/data/pathology/train_data.json
+          storage: ./projects/pathology/data/pathology/train_data.json
+        val:
+          url: ./projects/pathology/data/pathology/val_data.json
+          storage: ./projects/pathology/data/pathology/val_data.json
+        test:
+          url: ./projects/pathology/data/pathology/test_data.json
+          storage: ./projects/pathology/data/pathology/test_data.json
+      features:
+        storage: ./projects/pathology/data/hipt_features/hipt_last_layer/
