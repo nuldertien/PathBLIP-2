@@ -10,6 +10,12 @@ This repository contains all code to support the paper:
   <img width="100%" alt="Overview" src=".github/model_overview.png">
 </div>
 
+We developed a vision-language model for the pathology domain of melanocytic lesions. 
+The model was trained and evaluated using a dataset of **19,636** melanocytic lesion cases, consisting of one or more whole slide images (WSIs) and a pathology report per case. 
+In total, the dataset comprised of **42,433** H&E-stained WSIs and **2,132,008** words.
+We built upon the [BLIP-2 framework](https://github.com/salesforce/LAVIS/tree/main/projects/blip2) using [BioGPT](https://github.com/microsoft/BioGPT) as base language model and [HIPT](https://github.com/mahmoodlab/HIPT) for WSI feature extraction.
+To evaluate the model, we assessed the cross-modal retrieval performance and conducted a reader study to score the quality of the generated reports.
+
 ## Model Parameters
 
 We provide checkpoints for both the retrieval and report generation stages. All models are available from the corresponding [HuggingFace repository](https://huggingface.co/RTLucassen/PathBLIP-2).
