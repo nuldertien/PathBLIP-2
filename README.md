@@ -42,7 +42,7 @@ Final Stage 2 models:
 If you found our work useful in your research, please consider citing our paper:
 
 ```bibtex
-@misc{lucassen2025importancetextpreprocessingmultimodal,
+@article{lucassen2025importance,
   title={On the Importance of Text Preprocessing for Multimodal Representation Learning and Pathology Report Generation}, 
   author={Lucassen, Ruben T and van de Luijtgaarden, Tijn and Moonemans, Sander P J and Breimer, Gerben E and Blokx, Willeke A M and Veta, Mitko},
   year={2025},
