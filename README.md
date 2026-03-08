@@ -6,7 +6,7 @@ This repository contains all code to support the paper:
 
 Accepted at the MICCAI 2025 COMPAYL workshop.
 
-[[`arXiv`](https://arxiv.org/pdf/2502.19285)] [[`COMPAYL Poster`](https://github.com/nuldertien/PathBLIP-2/tree/main/.github/COMPAYL_poster.pdf)]
+[[`arXiv`](https://arxiv.org/pdf/2502.19285)] [[`PMLR`](https://proceedings.mlr.press/v316/lucassen26a.html)] [[`COMPAYL Poster`](https://github.com/nuldertien/PathBLIP-2/tree/main/.github/COMPAYL_poster.pdf)]
 
 <div align="center">
   <img width="100%" alt="Overview" src=".github/model_overview.png">
